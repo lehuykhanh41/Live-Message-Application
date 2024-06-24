@@ -46,7 +46,7 @@ export const signup = async(req, res, next) => {
         }
 
     } catch (error) {
-        res.status(500).json({error: "Server Error"});
+        res.status(502).json({error: `Server Error, encountered ${error}`});
         console.log(error);
     }
     next();
@@ -61,7 +61,7 @@ export const login = async (req, res, next) => {
             const comparison = await bcryptjs.compare(password, findUser.password);
             if (comparison) {
                 generateToken(findUser._id, res);
-                res.status(200).json({message: `Authorized. Welcome ${findUser.name}`, avatar: findUser.avatar});
+                res.status(200).json({username: findUser.username, message: `Authorized. Welcome ${findUser.name}`, avatar: findUser.avatar});
             } else {
                 res.status(403).json({message: "Incorrect Password"});
             }
