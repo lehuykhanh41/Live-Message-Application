@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useConversation from '../ZustandState/useConversation';
+import useGetMessage from '../Hooks/useGetMessage';
 
-function Conversation({key, conversation}) {
+function Conversation({conversation}) {
 
     const {selectedConversation, setSelectedConversation} = useConversation();
+    const {getMessageBasedOnUser} = useGetMessage();
+    const [select, setSelect] = useState(false);
 
-    const selected = selectedConversation?._id === conversation._id;
+    useEffect(()=>{
+        if (selectedConversation) {
+            setSelect(selectedConversation._id == conversation._id);
+        }
+    }, [selectedConversation]);
 
   return (
     <div>
-        <div className={`${selected ? "bg-blue-600" : ""} flex items-center hover:bg-blue-300 rounded-lg cursor-pointer h-20`} onClick={()=>setSelectedConversation(conversation)}>
+        <div className={`${select? "bg-primary" : ""} flex items-center hover:bg-blue-400 rounded-lg cursor-pointer h-20`} onClick={()=>{setSelectedConversation(conversation)}}>
             
         <div className="avatar offline">
-            <div className="w-16 h-16 rounded-full">
+            <div className="w-16 h-18 rounded-full">
                 <img src={conversation.avatar} alt="Online Avatar" />
             </div>
         </div>
@@ -26,7 +33,6 @@ function Conversation({key, conversation}) {
         </div>
 
     </div>
-
 
     </div>
   )

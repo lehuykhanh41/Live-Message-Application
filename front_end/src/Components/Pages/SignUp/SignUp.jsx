@@ -1,7 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
-import useSignUp from '../../Hooks/useSignUp'
+import useSignUp from '../../Hooks/useSignUp';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUp() {
   const [inputs, setInputs] = useState({
@@ -15,7 +17,13 @@ function SignUp() {
 
   async function proceedToSignUp(event) {
       event.preventDefault();
-      await signUp(inputs);
+      if (inputs.username.includes("@")) {
+        toast.error("Username cannot contain special characters.");
+      } else if (inputs.password.length < 6) {
+        toast.error("Password needs to be at least 6 characters long.");
+      } else {
+        await signUp(inputs);
+      }
   }
 
   return (
@@ -34,7 +42,7 @@ function SignUp() {
           <input type="text" placeholder="Your name:" className="w-full input input-bordered h-10" value={inputs.name} onChange={(event)=>setInputs({...inputs, name: event.target.value})}></input>
 
             <label className="label p-2"></label>
-            <input type="text" placeholder="Enter an username:" className="w-full input input-bordered h-10" value={inputs.username} onChange={(event)=>setInputs({...inputs, username: event.target.value})}></input>
+            <input type="text" placeholder="Enter an username:" className="w-full input input-bordered h-10" value={inputs.username} onChange={(event)=>setInputs({...inputs, username: event.target.value.toLowerCase()})}></input>
 
             <label className="label p-2"></label>
             <input type="password" placeholder="Enter your password:" className="w-full input input-bordered h-10" value={inputs.password} onChange={(event)=>setInputs({...inputs, password: event.target.value})}></input>

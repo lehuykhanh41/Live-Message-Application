@@ -21,7 +21,7 @@ export const signup = async(req, res, next) => {
         const encryptedPassword = await bcryptjs.hash(password, salt);
 
         // Temporary API call for random avatar placeholder.
-        const avt = `https://i.pravatar.cc/150/username=${username}`;
+        const avt = `https://ui-avatars.com/api/?name=${name}`;
 
         // Successful Call to create a new User (need to import the User Model.)
         const newUser = new User({
@@ -36,11 +36,7 @@ export const signup = async(req, res, next) => {
             await newUser.save(); // Push to MongoDB -> IMPORTANT
 
             // Return the new user created.
-            res.status(200).json({
-                username: newUser.username,
-                name: newUser.name,
-                avatar: newUser.avatar
-            });
+            res.status(200).json(newUser);
         } else {
             res.status(500).json({error: "Invalid User Data"});
         }
@@ -52,28 +48,31 @@ export const signup = async(req, res, next) => {
     next();
 }
 
-
-export const login = async (req, res, next) => {
+export const login = async(req, res, next) => {
     try {
-        const {username, password} = req.body;
+        const { username, password } = req.body;
+
         const findUser = await User.findOne({username});
+
         if (findUser) {
             const comparison = await bcryptjs.compare(password, findUser.password);
             if (comparison) {
+                console.log(comparison);
                 generateToken(findUser._id, res);
-                res.status(200).json({username: findUser.username, message: `Authorized. Welcome ${findUser.name}`, avatar: findUser.avatar});
+                res.status(200).json(findUser);
             } else {
-                res.status(403).json({message: "Incorrect Password"});
+                res.status(404).json({message: "Incorrect Password"});
             }
         } else {
-            res.status(404).json({error: "User Not Found"});
+            res.status(404).json({error: `User ${username} Not Found`});
         }
-    } catch {
+    } catch (error) {
         res.status(500).json({error: "Server Error"});
         console.log(error);
     }
     next();
 }
+
 
 
 export const logout = (req, res, next) => {
@@ -84,7 +83,6 @@ export const logout = (req, res, next) => {
 
     } catch {
         res.status(500).json({error: "Server Error"});
-        console.log(error);
     }
     next();    
 }

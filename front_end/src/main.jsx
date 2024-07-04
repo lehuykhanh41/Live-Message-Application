@@ -4,6 +4,7 @@ import App from './App.jsx'
 import {BrowserRouter} from 'react-router-dom';
 import './index.css';
 import { VerifiedContextProvider } from './Components/Context/VerifiedContext.jsx';
+import { ToastContainer } from 'react-toastify';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -11,9 +12,31 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <VerifiedContextProvider>
 
         <App />
+        <ToastContainer />
 
       </VerifiedContextProvider>
     </BrowserRouter>
     
   </React.StrictMode>,
 )
+
+/* USED TECHNOLOGIES:
+
+Build on Vite.
+
+FRONT END:
+- TAILWIND & POSTCSS
+- DAISY UI
+- REACT TOASTIFY
+- REACT ROUTER DOM
+- ZUSTAND
+- AUTO PREFIXER.
+
+BACK END:
+- COOKIE PARSER
+- BCRYPTJS
+- DOTENV
+- EXPRESS & MONGOOSE
+- NODEMON
+
+*/

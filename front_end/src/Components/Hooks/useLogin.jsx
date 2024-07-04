@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useVerifiedContext } from '../Context/VerifiedContext';
+import { toast } from 'react-toastify';
 
 function useLogin() {
 
@@ -9,14 +10,13 @@ function useLogin() {
 
     function checkForLoginInputs(inputs) {
         if (!inputs.username || !inputs.password) {
-            alert("Please fill all fields.");
+            toast.error("Username or password is missing");
             return false;
         }
-
         return true;
     }
 
-    async function issueLogin(inputs) {
+        const issueLogin = async (inputs) => {
         const checkResult = checkForLoginInputs(inputs);
 
         if (!checkResult) {
@@ -24,26 +24,28 @@ function useLogin() {
         }
 
         setLoading(true);
+
         try {
-            const res = await fetch("http://localhost:7000/api/auth/login", {
+            const res = await fetch("/api/auth/login", {
                 method: "POST",
-                header: {"Content-Type": "application/json"},
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(inputs),
             });
 
             const data = await res.json();
+
             if (data.error) {
-                throw new Error(data.error)
-            }
-            if (data.username) {
+                throw new Error(data.error);
+            } else if (data.username) {
                 setCurrUser(data);
                 localStorage.setItem("currUser", JSON.stringify(data));
+                toast.success(`Login successful. Welcome ${data.name}`);
             } else {
-                alert(data.message);
+                toast.error(data.message)
             }
-            
+          
         } catch (err) {
-            console.log(err);
+            toast.error(err.message);
         } finally {
             setLoading(false);
         }

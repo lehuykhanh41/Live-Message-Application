@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState} from 'react'
 import {Link} from 'react-router-dom';
 import useLogin from '../../Hooks/useLogin';
 
@@ -7,7 +7,7 @@ function Login() {
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",
-  })
+  });
 
   const {loading, issueLogin} = useLogin();
 
@@ -28,7 +28,7 @@ function Login() {
         <form onSubmit={handleLogin}>
           <div>
             <label className="label p-2"></label>
-            <input type="text" placeholder="Username:" className="w-full input input-bordered h-10" value={loginInfo.username} onChange={(event)=>{setLoginInfo({...loginInfo, username: event.target.value})}}></input>
+            <input type="text" placeholder="Username:" className="w-full input input-bordered h-10" value={loginInfo.username} onChange={(event)=>{setLoginInfo({...loginInfo, username: event.target.value.toLowerCase()})}}></input>
 
             <label className="label p-2"></label>
             <input type="password" placeholder="Password:" className="w-full input input-bordered h-10" value={loginInfo.password} onChange={(event)=>{setLoginInfo({...loginInfo, password: event.target.value})}}></input>

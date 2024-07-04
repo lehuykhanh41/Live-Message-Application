@@ -13,12 +13,11 @@ export const sendMessage = async (req, res, next) => {
         });
 
         if (!conversation) {
-
             conversation = await Conversation.create({
                 participants: [senderId, receiverId]
             });
         }
-
+        
         const newMessage = new Message({
             senderId,
             receiverId,
@@ -32,7 +31,7 @@ export const sendMessage = async (req, res, next) => {
             await Promise.all([newMessage.save(), conversation.save()]);
             res.status(200).json(newMessage);
         }
-
+        
 
     } catch (error) {
         res.status(500).json({error: "Server Error (Message)"});
@@ -53,12 +52,12 @@ export const getMessage = async(req, res, next) => {
         }).populate("messages"); // Populate return the actual objects stored in the array field.
 
         if (!conversation) {
-            res.status(400).json({error: "Conversation does not exist."});
-        }
-
-        const messages = conversation.messages;
-        if (messages) {
-            res.status(200).json(messages);
+            res.status(404).json({error: "Conversation does not exist"});
+        } else {
+            const messages = conversation.messages;
+            if (messages) {
+                res.status(200).json(messages);
+            }
         }
 
     } catch {

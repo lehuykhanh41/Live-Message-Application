@@ -9,4 +9,5 @@ const mongoConnect = async() => {
     }
 }
 
+
 export default mongoConnect;

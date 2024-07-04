@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import toast from 'react-hot-toast';
+import {toast} from 'react-toastify';
 import { useVerifiedContext } from '../Context/VerifiedContext';
 
 function useSignUp() {
@@ -41,10 +41,10 @@ function useSignUp() {
             const data = await res.json();
 
             if (data) {
+                toast.success(`Registration Success ! Welcome ${data.name}`);
                 localStorage.setItem("currUser", JSON.stringify(data));
-                setCurrUser(data)
+                setCurrUser(data);
             }
-
 
         } catch (err) {
             console.log(err);

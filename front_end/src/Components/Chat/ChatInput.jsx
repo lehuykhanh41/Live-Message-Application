@@ -8,16 +8,18 @@ function ChatInput() {
     async function handleSendMessage(event) {
         event.preventDefault();
         if (!message) {return;}
-        const data = await sendMessage(message);
+        else {
+            const data = await sendMessage(message).then(setMessage("")); 
+        }
     }
   return (
-    <div>
+    <div className='h-1/6'>
 
         <form className='flex' onSubmit={handleSendMessage}>
             <div className="w-full h-10">
-                <input type="text" placeholder='Say Something...' className='text-sm rounded-full w-full p-2 mt-1' value={message} onChange={(event)=>{setMessage(event.target.value)}}></input>
+                <input type="text" placeholder='Say Something...' className='text-sm rounded-full w-[95%] p-2 mt-1' value={message} onChange={(event)=>{setMessage(event.target.value)}}></input>
             </div>
-            <button type="submit" className='btn btn-circle btn-md text-white bg-primary h-2 border-black absolute right-1' disable={loading}>
+            <button type="submit" className='btn btn-circle btn-md text-white bg-primary h-2 border-black absolute right-1'>
                 {loading ? (<span className='loading loading-spinner'></span>) : (<span>➤</span>)}
                 </button>
         </form>
