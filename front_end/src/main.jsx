@@ -12,6 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
     <VerifiedContextProvider>
       <SocketContextProvider>
+        
         <App />
         <ToastContainer />
 
