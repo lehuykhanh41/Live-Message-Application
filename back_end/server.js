@@ -5,8 +5,9 @@ import MessageRouters from './routes/message.js';
 import UserRouters from './routes/user.js';
 import mongoConnect from './db/MongoConnect.js';
 import cookieParser from 'cookie-parser';
+import {app, server} from './socket/socket.js'
 
-const app = express();
+
 
 dotenv.config();
 const PORT = process.env.PORT || 7000;
@@ -26,7 +27,7 @@ app.get('/', (req, res)=>{
 */
 
 
-app.listen(PORT, ()=>{
+server.listen(PORT, ()=>{
     mongoConnect();
     console.log(`The server is listening at PORT ${PORT}...`);
 })

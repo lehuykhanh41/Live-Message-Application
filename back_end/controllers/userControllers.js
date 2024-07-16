@@ -24,12 +24,14 @@ export const getAllUsers = async (req, res, next) => {
 
 export const searchPerson = async(req, res, next) => {
 
+    //{$regex: /^nameToBeFound$/i}}
     try {
         const nameToBeFound = req.params.personName;
-        const findUser = await User.findOne({name: {$regex: /^nameToBeFound$/i}});
+        const findUser = await User.findOne({name: 'Test Person'});
 
         if (!findUser) {
             res.status(404).json({error: "User not found"});
+            console.log("User No No Found");
         } else {
             res.status(200).json(findUser);
         } 

@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import ChatBubble from './ChatBubble';
 import useConversation from '../ZustandState/useConversation';
 import useGetMessage from '../Hooks/useGetMessage';
+import useListenerMessage from '../Hooks/useListenerMessage';
 
 
 function ChatContainer() {
   const {loading, getMessageBasedOnUser} = useGetMessage();
   const {selectedConversation, messages} = useConversation();
   const [messageMap, setMessageMap] = useState([]);
+  useListenerMessage();
 
   useEffect(()=>{
 

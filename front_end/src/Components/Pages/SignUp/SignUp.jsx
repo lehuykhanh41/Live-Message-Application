@@ -52,12 +52,12 @@ function SignUp() {
           </div>
 
 
-          <div className="mt-3">
+          <div className="mt-3 text-center">
             <Link to="/login" className="text-white text-sm hover:underline hover:text-blue-300 italic">Already have an account?</Link>
           </div>
 
-          <div>
-          <button className="text-white bg-gray-600 hover:bg-gray-500 btn btn-md mt-5 border border-slate-900" disabled={loading}>
+          <div className='text-center'>
+          <button className="text-white bg-blue-500 hover:bg-blue-700 btn btn-md mt-5 border border-slate-900" disabled={loading}>
           {loading ? (<span className='loading loading-dots'></span>) : (<span>SIGN UP</span>)}</button>
           </div>
         </form>

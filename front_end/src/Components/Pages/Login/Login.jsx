@@ -34,12 +34,12 @@ function Login() {
             <input type="password" placeholder="Password:" className="w-full input input-bordered h-10" value={loginInfo.password} onChange={(event)=>{setLoginInfo({...loginInfo, password: event.target.value})}}></input>
           </div>
 
-          <div className="mt-3">
+          <div className="mt-3 text-center">
             <Link to="/signup" className="text-white text-sm hover:underline hover:text-blue-300 italic">Don't have an account? Register now</Link>
           </div>
 
-          <div>
-            <button className="text-white bg-gray-600 hover:bg-gray-500 btn btn-md mt-3 border border-slate-900" disabled={loading}>
+          <div className="text-center">
+            <button className="text-white bg-blue-500 hover:bg-blue-700 btn btn-md mt-3 border border-slate-900" disabled={loading}>
               {loading ? (<span className='loading loading-spinner'></span>) : (<span>LOGIN</span>)}
               </button>
           </div>

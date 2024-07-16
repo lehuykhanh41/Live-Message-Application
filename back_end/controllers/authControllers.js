@@ -57,7 +57,6 @@ export const login = async(req, res, next) => {
         if (findUser) {
             const comparison = await bcryptjs.compare(password, findUser.password);
             if (comparison) {
-                console.log(comparison);
                 generateToken(findUser._id, res);
                 res.status(200).json(findUser);
             } else {

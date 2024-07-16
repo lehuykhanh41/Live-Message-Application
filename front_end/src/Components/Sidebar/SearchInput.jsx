@@ -14,7 +14,8 @@ function SearchInput() {
     if (inputs.length < 2) {
       toast.error("Please enter a longer name");
     } else {
-      const result = conversation.find((item)=>{return item.name.toLowerCase().includes(inputs)});
+      let inputLowerCase = inputs.toLowerCase();
+      const result = conversation.find((item)=>{return item.name.toLowerCase().includes(inputLowerCase)});
       if (result) {
         setSelectedConversation(result);
       } else {
