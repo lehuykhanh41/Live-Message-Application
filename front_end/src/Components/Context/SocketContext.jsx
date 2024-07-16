@@ -19,7 +19,7 @@ export const SocketContextProvider = ({children}) => {
     useEffect(()=>{
         // Io and front connect to back end.
         if (currUser) {
-            const socket = io("http://localhost:7000", {
+            const socket = io("https://live-message-application.onrender.com/", {
                 query: {
                     userId: currUser._id,
                 }
