@@ -9,11 +9,19 @@ Mini-Convo is a simple, real time chat room that allow live-chatting between dif
 
 ## 2. INSTALLS:
 
-To build the app:
+1. SET UP .env FILE:
+```
+MONGODB_URI = ...
+JWT_KEY = ...
+PORT = ...
+```
+
+2. Build the app:
 ```
 npm run build
 ```
-To start the app after building:
+
+3. Start the app after building:
 ```
 npm run launch
 ```
