@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
 import {toast} from 'react-toastify';
-import { useVerifiedContext } from '../Context/VerifiedContext';
+import { useCurrUserContext } from '../Context/CurrUserContext';
 
 function useSignUp() {
     const [loading, setLoading] = useState(false);
-    const {setCurrUser} = useVerifiedContext();
+    const {setCurrUser} = useCurrUserContext();
 
     function checkForInputs(inputs) {
         if (!inputs.name || !inputs.username || !inputs.password || !inputs.pwverify) {

@@ -1,7 +1,7 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
-  "description": "A real-time chat app developed with MERN Stack",
+  "description": "A real-time chat app developed with NodeJS",
   "main": "server.js",
   "scripts": {
     "server": "nodemon back_end/server.js",

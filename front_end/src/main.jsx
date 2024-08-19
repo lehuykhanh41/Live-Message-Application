@@ -3,21 +3,21 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import {BrowserRouter} from 'react-router-dom';
 import './index.css';
-import { VerifiedContextProvider } from './Components/Context/VerifiedContext.jsx';
+import { CurrUserContextProvider } from './Components/Context/CurrUserContext.jsx';
 import { SocketContextProvider } from './Components/Context/SocketContext.jsx';
 import { ToastContainer } from 'react-toastify';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-    <VerifiedContextProvider>
+    <CurrUserContextProvider>
       <SocketContextProvider>
         
         <App />
         <ToastContainer />
 
       </SocketContextProvider>
-      </VerifiedContextProvider>
+      </CurrUserContextProvider>
     </BrowserRouter>
     
   </React.StrictMode>,

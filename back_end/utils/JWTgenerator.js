@@ -10,7 +10,7 @@ const generateToken = (userID, res) => {
         maxAge: 15 * 24 * 60 * 60 * 1000, // Miliseconds,
         httpOnly: true, // Avoid hacking.
         sameSite: "strict",
-        secure: process.env.MODES !== "DEV"
+        //secure: process.env.MODES !== "DEV"
     })
 }
 

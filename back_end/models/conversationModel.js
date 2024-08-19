@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
 const conversationSchema = new mongoose.Schema({
+
+    name: {
+        type: String,
+        default: "",
+    },
+
     participants: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -12,7 +18,17 @@ const conversationSchema = new mongoose.Schema({
             ref: "Message",
             default: [],
         }
-    ]
+    ],
+
+    admins: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            default: [],
+        },
+    ],
+
+
 
 }, {timestamps: true});
 

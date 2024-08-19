@@ -4,6 +4,7 @@ import path from 'path';
 import AuthRouters from './routes/auth.js';
 import MessageRouters from './routes/message.js';
 import UserRouters from './routes/user.js';
+import ConversationRouters from './routes/conversation.js';
 import mongoConnect from './db/MongoConnect.js';
 import cookieParser from 'cookie-parser';
 import {app, server} from './socket/socket.js'
@@ -19,11 +20,12 @@ app.use(cookieParser());
 app.use('/api/auth', AuthRouters);
 app.use('/api/message', MessageRouters);
 app.use('/api/users', UserRouters);
+app.use('/api/conversation', ConversationRouters);
 
 app.use(express.static(path.join(__dirname, '/front_end/dist')));
 app.get("*", (req, res)=>{
-    res.sendFile(path.join(__dirname, "front_end", "dist", "index.html"));
-})
+   res.sendFile(path.join(__dirname, "front_end", "dist", "index.html"));
+});
 
 /*
 app.get('/', (req, res)=>{

@@ -12,7 +12,7 @@ function useListenerMessage() {
     });
 
     return () => socket.off("newMessages");
-  }, [socket, messages])
+  }, [socket, messages]);
 }
 
 export default useListenerMessage;

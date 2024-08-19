@@ -13,13 +13,13 @@ function ChatInput() {
         }
     }
   return (
-    <div className='h-1/6'>
+    <div className='h-1/6 mt-3'>
 
-        <form className='flex' onSubmit={handleSendMessage}>
+        <form className='flex flex-row justify-center items-center h-full' onSubmit={handleSendMessage}>
             <div className="w-full h-10">
                 <input type="text" placeholder='Say Something...' className='text-sm rounded-full w-[95%] p-2 mt-1' value={message} onChange={(event)=>{setMessage(event.target.value)}}></input>
             </div>
-            <button type="submit" className='btn btn-circle btn-md text-white bg-primary h-2 border-black absolute right-1'>
+            <button type="submit" className='btn btn-circle btn-md text-white bg-blue-600 hover:bg-blue-400 h-2 border-black absolute right-1'>
                 {loading ? (<span className='loading loading-spinner'></span>) : (<span>➤</span>)}
                 </button>
         </form>

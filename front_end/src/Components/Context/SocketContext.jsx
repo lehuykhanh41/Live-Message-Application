@@ -1,25 +1,26 @@
 import {useState, useEffect, useContext, createContext} from 'react'
-import { useVerifiedContext } from './VerifiedContext';
+import { useCurrUserContext } from './CurrUserContext';
 import io from 'socket.io-client';
 
-// This is the USE methods.
 const SocketContext = createContext();
 
+// Inititate the useContext function.
 export const useSocketContext = () => {
     return useContext(SocketContext);
 };
 
-// This is the Component.
+// Create the Context Provider.
 export const SocketContextProvider = ({children}) => {
 
     const [socket, setSocket] = useState(null);
-    const [online, setOnline] = useState(null);
-    const {currUser} = useVerifiedContext();
+    const [online, setOnline] = useState(null); // See which users are online.
+
+    const {currUser} = useCurrUserContext(); 
 
     useEffect(()=>{
         // Io and front connect to back end.
         if (currUser) {
-            const socket = io("https://live-message-application.onrender.com/", {
+            const socket = io("http://localhost:7000", {
                 query: {
                     userId: currUser._id,
                 }

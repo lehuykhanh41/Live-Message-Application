@@ -1,11 +1,11 @@
 import express from 'express';
 import { getAllUsers, searchPerson } from '../controllers/userControllers.js';
-import protectRoute from '../middleware/protectRoute.js';
+import verifyUserBeforeOperaton from '../middleware/verifyUserBeforeOperaton.js';
 
 const UserRouters = express.Router();
 
-UserRouters.get('/', protectRoute, getAllUsers);
+UserRouters.get('/', verifyUserBeforeOperaton, getAllUsers);
 
-UserRouters.get('/:personName', protectRoute, searchPerson);
+UserRouters.get('/:personName', verifyUserBeforeOperaton, searchPerson);
 
 export default UserRouters;

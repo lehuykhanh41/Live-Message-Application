@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 
-const protectRoute = async (req, res, next) => {
+const verifyUserBeforeOperaton = async (req, res, next) => {
     try {
         const token = req.cookies.jwt;
         if (!token) {
@@ -27,4 +27,4 @@ const protectRoute = async (req, res, next) => {
     }
 }
 
-export default protectRoute;
+export default verifyUserBeforeOperaton;

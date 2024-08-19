@@ -4,15 +4,15 @@ import ChatInput from './ChatInput';
 import MessageLogo from '../../assets/Icons/message.svg'
 import useConversation from '../ZustandState/useConversation';
 import { useState, useEffect } from 'react';
-import { useVerifiedContext } from '../Context/VerifiedContext';
+import { useCurrUserContext } from '../Context/CurrUserContext';
 
 
 function StartingScreen() {
-  const {currUser} = useVerifiedContext();
+  const {currUser} = useCurrUserContext();
   return (
-    <div className="flex flex-col items-center justify-center text-center w-2/3 h-full text-center absolute">
-      <div className="text-white text-2xl font-bold text-center">
-        Welcome, {currUser.name} <br /> Please select a person to start chatting.
+    <div className="flex flex-col items-center justify-center w-full h-[100vh] max-h-[700px] text-center">
+      <div className="text-white text-3xl font-bold text-center">
+        Welcome, {currUser.name} <br /> Please search / select a conversation to start.
       </div>
 
       <img src={MessageLogo} className='w-2/6 mt-3'></img>
@@ -37,8 +37,8 @@ function ChatSection() {
 
         {selectedConversation ? 
         (<div className="flex flex-col h-full">
-        <div className="bg-blue-600 backdrop-filer backdrop-blur-lg bg-opacity-70 px-4 py-2 mb-2 rounded-full text-center">
-            <span className="text-white font-bold text-2xl">{selectedConversation.name}</span>
+        <div className="bg-blue-600 shadow-md shadow-blue-400 border-2 border-blue-400 px-4 py-2 mb-2 ml-[-25px] mt-[-8px] text-center">
+            <span className="text-white font-bold text-3xl">{selectedConversation.name}</span>
         </div>
 
         <div className="h-[90%] max-h-[90%] overflow-auto flex mb-10">

@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
-import { useVerifiedContext } from "../Context/VerifiedContext";
+import { useCurrUserContext } from "../Context/CurrUserContext";
+import useLanding from "../ZustandState/useLanding";
 
 function useLogout() {
 
     const [loading, setLoading] = useState(false);
-    const {setCurrUser} = useVerifiedContext();
+    const {setCurrUser} = useCurrUserContext();
+    const {setLanding} = useLanding(); // Is on the landing page or not?
 
     async function logOut() {
         
@@ -22,11 +24,12 @@ function useLogout() {
             }
             localStorage.removeItem("currUser");
             setCurrUser(null);
+            setLanding(true);
 
         } catch (err) {
             console.log(err);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
     

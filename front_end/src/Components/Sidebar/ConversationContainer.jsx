@@ -2,27 +2,36 @@ import React, { useState } from 'react'
 import Conversation from './Conversation';
 import useGetConversation from '../Hooks/useGetConversation';
 import { useEffect } from 'react';
+import useConversation from '../ZustandState/useConversation';
 
 function ConversationContainer() {
-  const {loading, conversation} = useGetConversation();
-  const [usersArray, setUsersArray] = useState([]);
+  const {currentTab} = useConversation();
+  const {loading, conversation, singleConversation, groupConversation} = useGetConversation();
+  const [conversationArray, setConversationArray] = useState([]);
+  const [renderingData, setRenderingData] = useState();
 
   useEffect(()=>{
-    setUsersArray(conversation);
-    renderUsersArray();
-  }, [conversation]);
+    if (currentTab == 0) {
+      setConversationArray(conversation);
+    } else if (currentTab == 1){
+      setConversationArray(groupConversation);
+    }
+  }, [currentTab, conversation, groupConversation]);
 
-  function renderUsersArray() {
-    let data = usersArray.map((item)=>{return <Conversation conversation={item} />});
+  useEffect(()=>{
+    renderConversationArray();
+  }, [conversationArray]);
 
-    return data;
+  
+  function renderConversationArray() {
+    let data = conversationArray.map((item)=>{return <Conversation conversation={item} />});
+    setRenderingData(data);
   }
-
   return (
 
-    <div className="py-3 my-3 gap-3 flex flex-col overflow-auto md:h-[95%]">
+    <div className="py-3 my-3 gap-3 overflow-auto flex flex-col md:h-[95%] max-h-[60vh]">
 
-        {(usersArray.length > 0) ? (renderUsersArray()) : (<h1 className='text-white'>No user is found.</h1>)}
+        {(conversationArray.length > 0) ? (renderingData) : (<h1 className='text-white'>Search for an user to start a conversation.</h1>)}
 
         
     </div>

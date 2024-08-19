@@ -14,7 +14,10 @@ const io = new Server(server, {
     }
 });
 
-const userSockets = {}; 
+// List of users socket added.
+const userSockets = {
+    
+}; 
 
 export const getReceiverSocketId = (receiverId) => {
     return userSockets[receiverId];

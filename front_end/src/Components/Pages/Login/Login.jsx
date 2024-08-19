@@ -35,11 +35,11 @@ function Login() {
           </div>
 
           <div className="mt-3 text-center">
-            <Link to="/signup" className="text-white text-sm hover:underline hover:text-blue-300 italic">Don't have an account? Register now</Link>
+            <p className="text-white text-md italic">Don't have an account? <Link to="/signup" className="hover:underline hover:text-[#00feff] font-bold">Register now</Link></p>
           </div>
 
           <div className="text-center">
-            <button className="text-white bg-blue-500 hover:bg-blue-700 btn btn-md mt-3 border border-slate-900" disabled={loading}>
+            <button className="text-white bg-[#0f7d9f] hover:bg-[#00feff] btn btn-md mt-3 border border-slate-900" disabled={loading}>
               {loading ? (<span className='loading loading-spinner'></span>) : (<span>LOGIN</span>)}
               </button>
           </div>

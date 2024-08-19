@@ -12,14 +12,29 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 6
+        minlength: 6,
     },
     avatar: {
         type: String,
         default: "",
-    }
+    },
 
-    
+    singleConversations: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Conversation",
+            default: [],
+        },
+    ],
+
+    groupConversations: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Conversation",
+            default: [],
+        },
+    ]
+
 }, {timestamps: true});
 
 const User = mongoose.model("User", userSchema);
